@@ -14,6 +14,8 @@
 		1B30233A1459A8A3A238C083 /* libPods-Joasis-JoasisTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46965F8588AD7D7C4EF23721 /* libPods-Joasis-JoasisTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9AA56F78ECD0057AC6D076B3 /* libPods-Joasis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A61181FC631FC53CEDFEB65 /* libPods-Joasis.a */; };
+		F32503FC26AA986A007CCC36 /* customicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32503FB26AA986A007CCC36 /* customicons.ttf */; };
+		F32503FD26AA986A007CCC36 /* customicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32503FB26AA986A007CCC36 /* customicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,7 @@
 		6B2B3929022D210646356C8D /* Pods-Joasis-JoasisTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joasis-JoasisTests.release.xcconfig"; path = "Target Support Files/Pods-Joasis-JoasisTests/Pods-Joasis-JoasisTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Joasis/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F32503FB26AA986A007CCC36 /* customicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = customicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +117,6 @@
 				27FD6E298596011453D7603A /* Pods-Joasis-JoasisTests.debug.xcconfig */,
 				6B2B3929022D210646356C8D /* Pods-Joasis-JoasisTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +130,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F32503FA26AA983B007CCC36 /* Resourses */,
 				13B07FAE1A68108700A75B9A /* Joasis */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* JoasisTests */,
@@ -147,6 +150,14 @@
 				00E356EE1AD99517003FC87E /* JoasisTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F32503FA26AA983B007CCC36 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				F32503FB26AA986A007CCC36 /* customicons.ttf */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F32503FD26AA986A007CCC36 /* customicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				F32503FC26AA986A007CCC36 /* customicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

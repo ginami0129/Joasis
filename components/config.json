@@ -1,0 +1,24 @@
+{
+  "name": "customicons",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "089659591320716de196657ed9f4bb8b",
+      "css": "n_box",
+      "code": 59408,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M375 291.7V708.3H458.3V500L541.7 708.3H625V291.7H541.7V500L458.3 291.7H375M208.3 125H791.7A83.3 83.3 0 0 1 875 208.3V791.7A83.3 83.3 0 0 1 791.7 875H208.3A83.3 83.3 0 0 1 125 791.7V208.3A83.3 83.3 0 0 1 208.3 125Z",
+        "width": 1000
+      },
+      "search": [
+        "n_box"
+      ]
+    }
+  ]
+}
