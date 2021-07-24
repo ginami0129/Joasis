@@ -5,11 +5,14 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../screens/HomeScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import MenuScreen from '../screens/MenuScreen';
 import MenuNotificationScreen from '../screens/MenuNotificationScreen';
 import NotificationKeywordScreen from '../screens/NotificationKeywordScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Reanimated 2']);
 
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -29,7 +32,11 @@ const NotificationTopTab = () => (
 
 const HomeStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="공지사항" component={HomeScreen} />
+    <Stack.Screen
+      name="공지사항"
+      component={NotificationScreen}
+      initialParams={{catagory: ''}}
+    />
   </Stack.Navigator>
 );
 
