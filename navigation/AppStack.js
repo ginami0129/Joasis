@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -10,6 +10,7 @@ import MenuScreen from '../screens/MenuScreen';
 import MenuNotificationScreen from '../screens/MenuNotificationScreen';
 import NotificationKeywordScreen from '../screens/NotificationKeywordScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import NoticeDetailScreen from '../screens/NoticeDetailScreen';
 
 import {LogBox} from 'react-native';
 LogBox.ignoreLogs(['Reanimated 2']);
@@ -31,29 +32,39 @@ const NotificationTopTab = () => (
 );
 
 const HomeStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen
       name="공지사항"
       component={NotificationScreen}
       initialParams={{catagory: ''}}
     />
+    <Stack.Screen
+      name="세부사항"
+      component={NoticeDetailScreen}
+      options={{
+        title: '',
+        headerBackImage: () => (
+          <Ionicons name="close-outline" size={30} color="black" />
+        ),
+      }}
+    />
   </Stack.Navigator>
 );
 
 const MenuStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="식단표" component={MenuScreen} />
   </Stack.Navigator>
 );
 
 const NotificationStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="키워드 설정" component={NotificationTopTab} />
   </Stack.Navigator>
 );
 
 const SettingsStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={screenOptions}>
     <Stack.Screen name="설정" component={SettingsScreen} />
   </Stack.Navigator>
 );
@@ -95,5 +106,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const screenOptions = {
+  headerStyle: {
+    shadowColor: 'black',
+    // shadowOpacity: 0.26,
+    // shadowRadius: 10,
+    elevation: 5,
+    // backgroundColor: 'white',
+  },
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+  headerTitleAlign: 'center',
+};
 
 export default AppStack;
