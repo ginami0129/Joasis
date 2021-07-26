@@ -5,9 +5,9 @@ export const getNotices = async (pageNumber, catagory) => {
   const response = await fetch(url);
   const htmlString = await response.text();
   const $ = cheerio.load(htmlString);
-  const $list = $('#print_area .page_list table tbody > tr').toArray();
+  const $list = $('#print_area .page_list table tbody > tr');
   let result = [];
-  $list.map(el => {
+  $list.toArray().map(el => {
     const $aTag = $('.left > span > a', el);
     const $mview = $('.mview', el);
     const href = $aTag.attr('href');
@@ -20,8 +20,9 @@ export const getNotices = async (pageNumber, catagory) => {
       date: $mview.eq(1).text(),
       views: $mview.eq(2).text(),
       isNew: $('td.left > span > img', el).length,
+      isNotice: $('th > img', el).length,
     });
   });
-  // console.log(result);
+  console.log(result);
   return result;
 };

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import Icon from '../components/SquareNIcon';
 import {windowWidth, windowHeight} from '../utils/Dimentions';
@@ -38,7 +39,17 @@ const NotificationScreen = ({route, navigation}) => {
       <View style={styles.listContainer}>
         <TouchableOpacity
           onPress={() => navigation.navigate('세부사항', {uri: item.link})}>
-          <Text style={styles.titleText}>{item.title}</Text>
+          <View style={styles.titleContainer}>
+            {item.isNotice == 1 ? (
+              <Image
+                source={require('../assets/icon_notice.png')}
+                style={{marginRight: 5}}
+              />
+            ) : (
+              <View></View>
+            )}
+            <Text style={styles.titleText}>{item.title}</Text>
+          </View>
           <View style={styles.otherContainer}>
             <View style={styles.infoContainer}>
               <Text style={styles.infoText}>{item.group}</Text>
@@ -52,7 +63,7 @@ const NotificationScreen = ({route, navigation}) => {
                 <View></View>
               )}
             </View>
-            <Text style={styles.viewsText}>{item.views}</Text>
+            <Text style={styles.viewsText}>{item.views}회</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -94,11 +105,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#dddddd',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   titleText: {
     fontSize: 14,
   },
   otherContainer: {
-    flexDirection: 'row',  
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 5,
