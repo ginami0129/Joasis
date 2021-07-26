@@ -1,4 +1,5 @@
 const cheerio = require('cheerio-without-node-native');
+const moment = require('moment');
 
 export const getNotices = async (pageNumber, catagory) => {
   const url = `https://www.jbnu.ac.kr/kor/?menuID=139&pno=${pageNumber}&category=${catagory}`;
@@ -27,7 +28,7 @@ export const getNotices = async (pageNumber, catagory) => {
   return result;
 };
 
-const getMenuFromDormitory = async (menuId, date) => {
+export const getMenuFromDormitory = async (menuId, date) => {
   // 기존관 : B7100 , 참빛관 : B7200, 특성화캠퍼스 : B7300
   const url = `https://likehome.jbnu.ac.kr/home/main/inner.php?sMenu=${menuId}&date=${date}`;
   const response = await fetch(url);
@@ -53,4 +54,39 @@ const getMenuFromDormitory = async (menuId, date) => {
     });
   }
   console.log(result);
+};
+
+export const getMenuFromJbnu = async () => {
+  // eq(2): 진수원, eq(4): 의대, eq(6): 후생관, eq(8): 정담원,
+  const url = 'http://sobi.chonbuk.ac.kr/chonbuk/m040101';
+  const response = await fetch(url);
+  const htmlString = await response.text();
+  const $ = cheerio.load(htmlString);
+  const $totalMenu = $('#sub_right > div');
+  const $menu = $('table tbody tr td[bgcolor="#ffffff"]', $totalMenu.eq(2));
+  const dateString = $('div > p > span > span').text();
+  const month = dateString.slice(3, 5);
+  const day = dateString.slice(7, 9);
+  const date = moment(moment().year() + month + day).add(-2, 'd');
+  let result = [];
+  for (let i = 0; i < 7; ++i) {
+    let launch = '';
+    let dinner = '';
+    if (i > 0 && i < 6) {
+      let launchIndex = i - 1;
+      let dinnerIndex = i + 4;
+      launch = $($menu.eq(launchIndex).html().replace(/<br>/g, ' ')).text();
+      dinner = $($menu.eq(dinnerIndex).html().replace(/<br>/g, ' ')).text();
+    }
+    result.push({
+      author: '진수원',
+      day: i,
+      date: date.add(1, 'd').format('M.D'),
+      morning: '',
+      launch: launch.trim(),
+      dinner: dinner.trim(),
+    });
+  }
+  console.log(result);
+  return result;
 };
