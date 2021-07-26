@@ -12,7 +12,7 @@ export const getNotices = async (pageNumber, catagory) => {
     const $mview = $('.mview', el);
     const href = $aTag.attr('href');
     result.push({
-      id: href.slice(-5, href.length),
+      id: href.slice(-5),
       group: $('.group', el).text().trim(),
       link: 'https://www.jbnu.ac.kr/kor/index.php' + href,
       title: $aTag.text().trim(),
@@ -23,6 +23,34 @@ export const getNotices = async (pageNumber, catagory) => {
       isNotice: $('th > img', el).length,
     });
   });
-  console.log(result);
+  // console.log(result);
   return result;
+};
+
+const getMenuFromDormitory = async (menuId, date) => {
+  // 기존관 : B7100 , 참빛관 : B7200, 특성화캠퍼스 : B7300
+  const url = `https://likehome.jbnu.ac.kr/home/main/inner.php?sMenu=${menuId}&date=${date}`;
+  const response = await fetch(url);
+  const htmlString = await response.text();
+  const $ = cheerio.load(htmlString);
+  const $list = $('#calendar table > tbody > tr > td');
+  const urlDate = moment(response.url.slice(-10)).add(-1, 'd');
+  let result = [];
+  for (let i = 0; i < 7; ++i) {
+    result.push({
+      day: i,
+      author: $('div.subreporttitle').text(),
+      date: urlDate.add(1, 'days').format('M.D'),
+      morning: $list.eq(i).text().trim(),
+      launch: $list
+        .eq(i + 7)
+        .text()
+        .trim(),
+      dinner: $list
+        .eq(i + 14)
+        .text()
+        .trim(),
+    });
+  }
+  console.log(result);
 };
