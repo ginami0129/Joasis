@@ -41,7 +41,7 @@ export const getMenuFromDormitory = async (menuId, date) => {
     result.push({
       day: i,
       author: $('div.subreporttitle').text(),
-      date: urlDate.add(1, 'days').format('M.D'),
+      date: urlDate.add(1, 'days').format('MM.DD'),
       morning: $list.eq(i).text().trim(),
       launch: $list
         .eq(i + 7)
@@ -81,7 +81,7 @@ export const getMenuFromJbnu = async () => {
     result.push({
       author: '진수원',
       day: i,
-      date: date.add(1, 'd').format('M.D'),
+      date: date.add(1, 'd').format('MM.DD'),
       morning: '',
       launch: launch.trim(),
       dinner: dinner.trim(),
@@ -89,4 +89,9 @@ export const getMenuFromJbnu = async () => {
   }
   console.log(result);
   return result;
+};
+
+export const numberToDay = number => {
+  let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
+  return day[number];
 };

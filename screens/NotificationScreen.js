@@ -34,44 +34,42 @@ const NotificationScreen = ({route, navigation}) => {
     return;
   };
 
-  const renderItem = ({item}) => {
-    return (
-      <View style={styles.listContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('세부사항', {uri: item.link})}>
-          <View style={styles.titleContainer}>
-            {item.isNotice == 1 ? (
-              <Image
-                source={require('../assets/icon_notice.png')}
-                style={{marginRight: 5}}
-              />
+  const renderItem = ({item}) => (
+    <View style={styles.listContainer}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('세부사항', {uri: item.link})}>
+        <View style={styles.titleContainer}>
+          {item.isNotice == 1 ? (
+            <Image
+              source={require('../assets/icon_notice.png')}
+              style={{marginRight: 5}}
+            />
+          ) : (
+            <View></View>
+          )}
+          <Text style={styles.titleText}>{item.title}</Text>
+        </View>
+        <View style={styles.otherContainer}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.infoText}>{item.group}</Text>
+            <Text style={styles.infoText}> | </Text>
+            <Text style={styles.infoText}>{item.date}</Text>
+            <Text style={styles.infoText}> | </Text>
+            <Text style={styles.infoText}>{item.author}</Text>
+            {item.isNew == 1 ? (
+              <Icon name="n_box" size={14} color={'#56286E'} />
             ) : (
               <View></View>
             )}
-            <Text style={styles.titleText}>{item.title}</Text>
           </View>
-          <View style={styles.otherContainer}>
-            <View style={styles.infoContainer}>
-              <Text style={styles.infoText}>{item.group}</Text>
-              <Text style={styles.infoText}> | </Text>
-              <Text style={styles.infoText}>{item.date}</Text>
-              <Text style={styles.infoText}> | </Text>
-              <Text style={styles.infoText}>{item.author}</Text>
-              {item.isNew == 1 ? (
-                <Icon name="n_box" size={14} color={'#56286E'} />
-              ) : (
-                <View></View>
-              )}
-            </View>
-            <Text style={styles.viewsText}>{item.views}회</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+          <Text style={styles.viewsText}>{item.views}회</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
@@ -93,12 +91,11 @@ const NotificationScreen = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // width: windowWidth,
-    alignItems: 'center',
+    flex: 1,
     backgroundColor: '#ffffff',
   },
   listContainer: {
+    flex: 1,
     height: 'auto',
     marginHorizontal: 15,
     paddingVertical: 15,
@@ -108,8 +105,10 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   titleText: {
+    flex: 1,
     fontSize: 14,
   },
   otherContainer: {
