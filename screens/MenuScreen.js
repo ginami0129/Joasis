@@ -89,14 +89,27 @@ const data = [
 
 const MenuScreen = ({route}) => {
   const flatListRef = useRef();
+  const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
+    getData = getMenuFromDormitory;
+    if (route.params.menuID == 2) {
+      getData = getMenuFromJbnu;
+    }
+    setMenuData(
+      await getData(route.params.menuID, moment().format('YYYY-MM-DD')),
+    );
     flatListRef.current.scrollToIndex({animated: true, index: moment().days()});
-  }, []);
-  
+    setLoading(false);
+  };
+
   const renderItem = ({item, index}) => {
     let isToday = item.day == moment().days();
+    if (item.morning == '') item.morning = '등록된 학식 정보가 없어요';
+    if (item.launch == '') item.launch = '등록된 학식 정보가 없어요';
+    if (item.dinner == '') item.dinner = '등록된 학식 정보가 없어요';
     return (
       <View style={styles.listContainer}>
         <View style={styles.dateContainer}>
@@ -129,10 +142,15 @@ const MenuScreen = ({route}) => {
       </View>
     );
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={menuData}
         renderItem={renderItem}
         ListFooterComponent={
           loading && <ActivityIndicator size="large" color="#56286E" />
@@ -160,9 +178,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   listFooter: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingVertical: 15,
   },
   listContainer: {

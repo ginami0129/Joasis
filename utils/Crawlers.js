@@ -41,7 +41,7 @@ export const getMenuFromDormitory = async (menuId, date) => {
     result.push({
       day: i,
       author: $('div.subreporttitle').text(),
-      date: urlDate.add(1, 'days').format('MM.DD'),
+      date: urlDate.add(1, 'days').format('MM월 DD일'),
       morning: $list.eq(i).text().trim(),
       launch: $list
         .eq(i + 7)
@@ -53,10 +53,11 @@ export const getMenuFromDormitory = async (menuId, date) => {
         .trim(),
     });
   }
-  console.log(result);
+  // console.log(result);
+  return result;
 };
 
-export const getMenuFromJbnu = async () => {
+export const getMenuFromJbnu = async (menuId, dummy) => {
   // eq(2): 진수원, eq(4): 의대, eq(6): 후생관, eq(8): 정담원,
   const url = 'http://sobi.chonbuk.ac.kr/chonbuk/m040101';
   const response = await fetch(url);
@@ -81,13 +82,13 @@ export const getMenuFromJbnu = async () => {
     result.push({
       author: '진수원',
       day: i,
-      date: date.add(1, 'd').format('MM.DD'),
+      date: date.add(1, 'd').format('MM월 DD일'),
       morning: '',
       launch: launch.trim(),
       dinner: dinner.trim(),
     });
   }
-  console.log(result);
+  // console.log(result);
   return result;
 };
 

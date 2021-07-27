@@ -69,7 +69,7 @@ const NotificationScreen = ({route, navigation}) => {
   );
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
   }, []);
 
   return (
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
+    borderBottomColor: '#56286E',
   },
   titleContainer: {
     flexDirection: 'row',
