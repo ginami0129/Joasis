@@ -96,3 +96,20 @@ export const numberToDay = number => {
   let day = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
   return day[number];
 };
+
+const getSchedule = async semester => {
+  const url = `https://www.jbnu.ac.kr/kor/?menuID=19&category=2021&semester=${semester}`;
+  const response = await fetch(url);
+  const htmlString = await response.text();
+  const $ = cheerio.load(htmlString);
+  const $schedule = $('#print_area .page_list table > tbody > tr');
+  let result = [];
+  for (let i = 0; i < $schedule.length; ++i) {
+    result.push({
+      title: $('td', $schedule.eq(i)).last().text().trim(),
+      description: $('td[scope=row]', $schedule.eq(i)).text().trim(),
+    });
+  }
+  console.log(result);
+  return result;
+};
