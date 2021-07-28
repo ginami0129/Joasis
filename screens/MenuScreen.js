@@ -33,6 +33,17 @@ const MenuScreen = ({route}) => {
 
   const renderItem = ({item, index}) => {
     let isToday = item.day == moment().days();
+    let isMorning = false;
+    let isLaunch = false;
+    let isDinner = false;
+    let hour = moment().hours();
+    if (hour < 11) {
+      isMorning = true;
+    } else if (hour < 16) {
+      isLaunch = true;
+    } else {
+      isDinner = true;
+    }
     if (item.morning == '') item.morning = '등록된 학식 정보가 없어요';
     if (item.launch == '') item.launch = '등록된 학식 정보가 없어요';
     if (item.dinner == '') item.dinner = '등록된 학식 정보가 없어요';
@@ -45,23 +56,44 @@ const MenuScreen = ({route}) => {
           {isToday && <Text style={styles.totayText}>오늘의 학식</Text>}
         </View>
         <View style={styles.menuContainer}>
-          <View style={[styles.badge, isToday && styles.selectedBadge]}>
+          <View
+            style={[
+              styles.badge,
+              isMorning && isToday && styles.selectedBadge,
+            ]}>
             <Text
-              style={[styles.menuTitle, isToday && styles.selectedMenuTitle]}>
+              style={[
+                styles.menuTitle,
+                isMorning && isToday && styles.selectedMenuTitle,
+              ]}>
               아침
             </Text>
           </View>
           <Text>{item.morning}</Text>
         </View>
         <View style={styles.menuContainer}>
-          <View style={styles.badge}>
-            <Text style={styles.menuTitle}>점심</Text>
+          <View
+            style={[styles.badge, isLaunch && isToday && styles.selectedBadge]}>
+            <Text
+              style={[
+                styles.menuTitle,
+                isLaunch && isToday && styles.selectedMenuTitle,
+              ]}>
+              점심
+            </Text>
           </View>
           <Text>{item.launch}</Text>
         </View>
         <View style={styles.menuContainer}>
-          <View style={styles.badge}>
-            <Text style={styles.menuTitle}>저녁</Text>
+          <View
+            style={[styles.badge, isDinner && isToday && styles.selectedBadge]}>
+            <Text
+              style={[
+                styles.menuTitle,
+                isDinner && isToday && styles.selectedMenuTitle,
+              ]}>
+              저녁
+            </Text>
           </View>
           <Text>{item.dinner}</Text>
         </View>
