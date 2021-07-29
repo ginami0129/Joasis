@@ -115,7 +115,11 @@ const AppStack = () => {
         activeTintColor: '#56286E',
         showLabel: false,
       }}>
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{unmountOnBlur: true}}
+      />
       <Tab.Screen name="Menu" component={MenuStack} />
       <Tab.Screen name="Calendar" component={CalendarStack} />
       <Tab.Screen name="Notifications" component={NotificationStack} />
