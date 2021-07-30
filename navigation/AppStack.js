@@ -59,6 +59,7 @@ const HomeStack = () => (
       component={NoticeDetailScreen}
       options={{
         title: '',
+        headerBackTitleVisible: false,
         headerBackImage: () => (
           <Ionicons name="close-outline" size={30} color="black" />
         ),
