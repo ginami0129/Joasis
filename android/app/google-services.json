@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "279719152960",
+    "firebase_url": "https://jbnu-notice-default-rtdb.firebaseio.com",
+    "project_id": "jbnu-notice",
+    "storage_bucket": "jbnu-notice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279719152960:android:1044cac60d5d33276bfea5",
+        "android_client_info": {
+          "package_name": "com.joasis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279719152960-knarpkl4g3cqb805oj50m3sn35k5srnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwlX2pOro69AeokXanNUBpBWIbUVvmg3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279719152960-knarpkl4g3cqb805oj50m3sn35k5srnf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "279719152960-b29o3gtheu2ivkduu3975u70ua3oe52b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.JbnuNotice"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
