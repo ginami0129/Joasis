@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     marginRight: 5,
-    fontSize: 12,
+    fontSize: 10,
     color: '#aaaaaa',
   },
   viewsText: {

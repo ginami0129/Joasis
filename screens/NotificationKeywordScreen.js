@@ -9,24 +9,36 @@ import {
   TouchableOpacity,
   Alert,
   FlatList,
+  Keyboard,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import messaging from '@react-native-firebase/messaging';
 
-const keywordData = ['수강', '2', '1', '2', '1', '2', '1', '2'];
-
 const NotificationKeywordScreen = () => {
   const [keywords, setKeywords] = useState('');
-  // const [keywordData, setKeywordData] = useState([]);
+  const [keywordData, setKeywordData] = useState([]);
   const subscribeTopic = () => {
-    console.log(keywords + '구독');
-    return messaging().subscribeToTopic(keywords);
+    if (keywordData.length == 10) {
+      Alert.alert('경고', '등록 가능한 키워드 수를 초과하였습니다.');
+      return;
+    }
+    if (keywords == '') {
+      Alert.alert('경고', '키워드를 입력해 주세요.');
+      return;
+    }
+    Keyboard.dismiss();
+    console.log(keywords);
+    setKeywordData(keywordData.concat(keywords));
+    setKeywords('');
+    // return messaging().subscribeToTopic(keywords);
   };
 
-  const renderItem = ({item, idx}) => {
-    // const onRemove = () => {
-    //   setKeywords(keywordData.filter((item, index) => index != String(idx)));
-    // };
+  const renderItem = ({item, index}) => {
+    const onRemove = () => {
+      setKeywordData(
+        keywordData.filter((item, idx) => String(idx) != String(index)),
+      );
+    };
     return (
       <View style={styles.listContainer}>
         <Text style={styles.keyword}>{item}</Text>
@@ -35,7 +47,7 @@ const NotificationKeywordScreen = () => {
             name="close-outline"
             size={40}
             color="black"
-            // onPress={onRemove}
+            onPress={onRemove}
           />
         </TouchableOpacity>
       </View>
@@ -51,7 +63,7 @@ const NotificationKeywordScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{marginHorizontal: 15, marginTop: 20, color: '#aaaaaa'}}>
-        현재 학교 공지사항 알림만 지원하고 있습니다.
+        현재 교내 공지사항 알림만 지원하고 있습니다.
       </Text>
       <View style={styles.inputContainer}>
         <TextInput
@@ -68,13 +80,13 @@ const NotificationKeywordScreen = () => {
         <View
           style={{
             flexDirection: 'row',
-            marginBottom: 15,
+            marginBottom: 5,
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 23}}>
+          <Text style={{fontWeight: 'bold', fontSize: 20}}>
             알림 받을 키워드{' '}
           </Text>
-          <Text style={{fontSize: 20}}>{keywordData.length}/10</Text>
+          <Text style={{fontSize: 16}}>{keywordData.length}/10</Text>
         </View>
         <FlatList
           data={keywordData}
@@ -96,20 +108,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderWidth: 1,
-    padding: 5,
+    paddingHorizontal: 3,
     borderRadius: 7,
     marginHorizontal: 15,
     borderColor: '#aaaaaa',
-    marginVertical: 25,
+    marginVertical: 15,
   },
   input: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
   },
   buttonTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#aaaaaa',
+    color: '#56286E',
     marginHorizontal: 10,
   },
   keywordContainer: {
@@ -119,10 +131,11 @@ const styles = StyleSheet.create({
   listContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 5,
   },
   keyword: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 10,
   },
 });
