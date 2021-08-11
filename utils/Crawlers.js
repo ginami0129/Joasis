@@ -113,3 +113,31 @@ const getSchedule = async semester => {
   console.log(result);
   return result;
 };
+
+export const getMenuFromJeonju = async (menuId, dummy) => {
+  const url = 'http://jeonju.jbdream.or.kr/bbs/board.php?bo_table=sub03_06';
+  const response = await fetch(url);
+  const htmlString = await response.text();
+  const $ = cheerio.load(htmlString);
+  const $menu = $('div.tbl_head01 td.td_board1');
+  const date = moment().add(-1 * moment().days(), 'd');
+  let result = [];
+  for (let i = 0; i < 7; i++) {
+    let idx = 3 * i;
+    result.push({
+      author: '장학숙',
+      day: (i + 1) % 7,
+      date: date.add(1, 'd').format('MM월 DD일'),
+      morning: $menu.eq(idx).text().replace(/\//g, ' '),
+      launch: $menu
+        .eq(idx + 1)
+        .text()
+        .replace(/\//g, ' '),
+      dinner: $menu
+        .eq(idx + 2)
+        .text()
+        .replace(/\//g, ' '),
+    });
+  }
+  return result;
+};

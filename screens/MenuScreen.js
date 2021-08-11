@@ -10,6 +10,7 @@ import {
   getMenuFromDormitory,
   getMenuFromJbnu,
   numberToDay,
+  getMenuFromJeonju,
 } from '../utils/Crawlers';
 const moment = require('moment');
 
@@ -21,13 +22,18 @@ const MenuScreen = ({route}) => {
   const fetchData = async () => {
     setLoading(true);
     let getData = getMenuFromDormitory;
+    let index = moment().days();
     if (route.params.menuID == 2) {
       getData = getMenuFromJbnu;
+    }
+    if (route.params.menuID == 3) {
+      getData = getMenuFromJeonju;
+      index = (index + 6) % 7;
     }
     setMenuData(
       await getData(route.params.menuID, moment().format('YYYY-MM-DD')),
     );
-    flatListRef.current.scrollToIndex({animated: true, index: moment().days()});
+    flatListRef.current.scrollToIndex({animated: true, index: index});
     setLoading(false);
   };
 
@@ -44,9 +50,9 @@ const MenuScreen = ({route}) => {
     } else {
       isDinner = true;
     }
-    if (item.morning == '') item.morning = '등록된 학식 정보가 없어요';
-    if (item.launch == '') item.launch = '등록된 학식 정보가 없어요';
-    if (item.dinner == '') item.dinner = '등록된 학식 정보가 없어요';
+    if (item.morning == '') item.morning = '등록된 식단 정보가 없어요';
+    if (item.launch == '') item.launch = '등록된 식단 정보가 없어요';
+    if (item.dinner == '') item.dinner = '등록된 식단 정보가 없어요';
     return (
       <View style={styles.listContainer}>
         <View style={styles.dateContainer}>
@@ -119,8 +125,12 @@ const MenuScreen = ({route}) => {
         onScrollToIndexFailed={info => {
           const wait = new Promise(resolve => setTimeout(resolve, 500));
           wait.then(() => {
+            let index = moment().days();
+            if (route.params.menuID == 3) {
+              index = (index + 6) % 7;
+            }
             flatListRef.current.scrollToIndex({
-              index: moment().days(),
+              index: index,
               animated: true,
             });
           });

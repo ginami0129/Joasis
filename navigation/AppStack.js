@@ -44,6 +44,11 @@ const MenuTopTab = () => (
       component={MenuScreen}
       initialParams={{menuID: '2'}}
     />
+    <TopTab.Screen
+      name="장학숙"
+      component={MenuScreen}
+      initialParams={{menuID: '3'}}
+    />
   </TopTab.Navigator>
 );
 
