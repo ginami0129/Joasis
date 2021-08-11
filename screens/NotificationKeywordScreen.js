@@ -5,18 +5,21 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Button,
   TouchableOpacity,
   Alert,
   FlatList,
   Keyboard,
+  ActivityIndicator,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import messaging from '@react-native-firebase/messaging';
+import database from '@react-native-firebase/database';
 
 const NotificationKeywordScreen = () => {
+  if (loading == true) return;
   const [keywords, setKeywords] = useState('');
   const [keywordData, setKeywordData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const subscribeTopic = () => {
     if (keywordData.length == 10) {
       Alert.alert('경고', '등록 가능한 키워드 수를 초과하였습니다.');
@@ -26,19 +29,51 @@ const NotificationKeywordScreen = () => {
       Alert.alert('경고', '키워드를 입력해 주세요.');
       return;
     }
+    setLoading(true);
     Keyboard.dismiss();
-    console.log(keywords);
     setKeywordData(keywordData.concat(keywords));
     setKeywords('');
+
+    let obj = {};
+    let value = undefined;
+
+    database()
+      .ref('/keywords/')
+      .once('value')
+      .then(snapshot => {
+        value =
+          snapshot.val()[keywords] == undefined ? 0 : snapshot.val()[keywords];
+        obj[keywords] = value + 1;
+        database()
+          .ref('/keywords/')
+          .update(obj)
+          .then(() => setLoading(false));
+      });
     // return messaging().subscribeToTopic(keywords);
   };
 
   const renderItem = ({item, index}) => {
     const onRemove = () => {
-      setKeywordData(
-        keywordData.filter((item, idx) => String(idx) != String(index)),
-      );
+      if (loading == true) return;
+      setLoading(true);
+      let obj = {};
+      database()
+        .ref('/keywords/')
+        .once('value')
+        .then(snapshot => {
+          obj[item] = snapshot.val()[item] - 1;
+          database()
+            .ref('/keywords/')
+            .update(obj)
+            .then(() => {
+              setKeywordData(
+                keywordData.filter((item, idx) => String(idx) != String(index)),
+              );
+              setLoading(false);
+            });
+        });
     };
+
     return (
       <View style={styles.listContainer}>
         <Text style={styles.keyword}>{item}</Text>
@@ -94,6 +129,13 @@ const NotificationKeywordScreen = () => {
           keyExtractor={(item, index) => index}
         />
       </View>
+      {loading && (
+        <ActivityIndicator
+          style={styles.loading}
+          size="large"
+          color="#56286E"
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -137,6 +179,17 @@ const styles = StyleSheet.create({
   keyword: {
     fontSize: 16,
     marginLeft: 10,
+  },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    opacity: 0.7,
+    backgroundColor: '#eeeeee',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

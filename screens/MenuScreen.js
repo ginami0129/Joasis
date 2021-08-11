@@ -59,7 +59,7 @@ const MenuScreen = ({route}) => {
           <Text style={styles.dateText}>
             {item.date} {numberToDay(item.day)}
           </Text>
-          {isToday && <Text style={styles.totayText}>오늘의 학식</Text>}
+          {isToday && <Text style={styles.totayText}>오늘의 식단</Text>}
         </View>
         <View style={styles.menuContainer}>
           <View
