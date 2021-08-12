@@ -14,6 +14,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import messaging from '@react-native-firebase/messaging';
 import database from '@react-native-firebase/database';
+import Inko from 'inko';
 
 const NotificationKeywordScreen = () => {
   if (loading == true) return;
@@ -49,7 +50,9 @@ const NotificationKeywordScreen = () => {
           .update(obj)
           .then(() => setLoading(false));
       });
-    // return messaging().subscribeToTopic(keywords);
+    let inko = new Inko();
+    // console.log(inko.ko2en(keywords));
+    return messaging().subscribeToTopic(inko.ko2en(keywords));
   };
 
   const renderItem = ({item, index}) => {
