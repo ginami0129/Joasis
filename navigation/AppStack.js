@@ -39,11 +39,11 @@ const MenuTopTab = () => (
       component={MenuScreen}
       initialParams={{menuID: 'B7200'}}
     />
-    <TopTab.Screen
+    {/* <TopTab.Screen
       name="진수당"
       component={MenuScreen}
       initialParams={{menuID: '2'}}
-    />
+    /> */}
     <TopTab.Screen
       name="장학숙"
       component={MenuScreen}
@@ -81,7 +81,7 @@ const MenuStack = () => (
 
 const NotificationStack = () => (
   <Stack.Navigator screenOptions={screenOptions}>
-    <Stack.Screen name="키워드 설정" component={NotificationTopTab} />
+    <Stack.Screen name="알림 설정" component={NotificationTopTab} />
   </Stack.Navigator>
 );
 

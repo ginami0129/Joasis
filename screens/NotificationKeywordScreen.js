@@ -75,6 +75,8 @@ const NotificationKeywordScreen = () => {
               setLoading(false);
             });
         });
+      let inko = new Inko();
+      return messaging().unsubscribeFromTopic(inko.ko2en(item));
     };
 
     return (

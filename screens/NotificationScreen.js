@@ -95,11 +95,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   listContainer: {
-    flex: 1,
     height: 'auto',
     marginHorizontal: 15,
     paddingVertical: 15,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: '#56286E',
   },
   titleContainer: {

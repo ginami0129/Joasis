@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     marginHorizontal: 15,
     paddingVertical: 15,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: '#56286E',
   },
   dateContainer: {
