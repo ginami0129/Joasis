@@ -1,7 +1,7 @@
 # Joasis
 
 > 🚩 [Joasis 인프라 배포 자동화 설명](https://youtu.be/4hP23OKuTds)  
-> ☁ [Presentation 자료]()
+> ☁ [Presentation 자료](https://github.com/ginami0129g/Joasis/blob/main/docs/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EC%84%A4%EB%AA%85.pdf)
 
 <img width="158" alt="그림1" src="https://user-images.githubusercontent.com/48406807/153062337-c60f2293-72e1-4f08-ac5a-54ad08078ae5.png">
 <img width="158" alt="그림2" src="https://user-images.githubusercontent.com/48406807/153062571-389838c9-26ec-410d-b2b8-ee7f0b465224.png">
